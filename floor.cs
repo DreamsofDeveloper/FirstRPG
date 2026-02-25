@@ -1,6 +1,9 @@
 public class Floor
 {
-    public void ItemsOnTheFloor()
+private string collectableItem;
+private List<String>collectableItems = new List<String>();
+
+    public void ItemsOnTheFloor(string )
     {
         
         
