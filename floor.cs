@@ -1,13 +1,21 @@
+using System;
+using System.Collections.Generic;
+
 public class Floor
 {
-private string collectableItem;
-private List<string>collectableItems = new List<string>();
+    public List<string> collectableItems = new List<string>();
 
-    public void ItemsOnTheFloor(string droppedItem )
+    public void ItemsOnTheFloor(string droppedItem)
     {
-        collectableItems.Add(droppeditem);
-        
+        if (string.IsNullOrEmpty(droppedItem))
+        {
+            Console.WriteLine("Yere eklenecek eşya yok.");
+            return;
+        }
+
+        collectableItems.Add(droppedItem);
+    
     }
 
-
+   
 }

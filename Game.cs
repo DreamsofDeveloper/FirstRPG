@@ -1,10 +1,31 @@
 using System;
+using System.Runtime.InteropServices;
 
 public class Game
 {
-    private readonly InventorySystems inv = new InventorySystems();
-    private  Player player = new Player();
-    private Enemy enemy = new Enemy();
+
+    private readonly Floor floor;
+    private readonly InventorySystems inv;
+    private readonly CraftSystem craft;
+    private readonly Player player;
+    private readonly Goblin enemy;
+
+
+
+    public Game()
+    {
+        
+    floor = new Floor();
+    inv = new InventorySystems();
+    craft = new CraftSystem();
+
+
+    //Entities
+    player = new Player(50, 50,inv);
+    enemy = new Goblin(floor);
+    
+    }
+    
 
     public void Run()
     {
@@ -18,17 +39,31 @@ public class Game
         while (true)
         {
             Console.Write(menu);
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
 
             switch (input)
             {
                 case "1":
-                    player.Attack();
-                    enemy.Dead(player.AttackPower);
+                    if (!enemy.IsDead)
+                    {
+                      player.Attack(); 
+                      enemy.TakeDamage(player.AttackPower);  
+
+                      if (enemy.IsDead) // Test için yeniden canladırma
+                        {
+
+                         enemy.Hp = 50;
+                         enemy.IsDead = false;
+                        }
+                    } 
+                    
+                     
                     break;
 
                 case "2":
-                    inv.CollectItems();
+                   
+                    player.CollectItems(floor);
+                   
                     break;
 
                 case "3":
@@ -36,7 +71,7 @@ public class Game
                     break;
 
                 case "4":
-                    inv.CraftMenu();
+                    craft.CraftMenu(player);
                     break;
 
                 case "5":
