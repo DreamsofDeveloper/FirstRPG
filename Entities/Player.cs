@@ -54,7 +54,9 @@ public Player(int healt, int AttackPower, InventorySystems inv)
 
         if (!TrygetValue || have < amount) return false;
 
-        int left = have - amount;
+        else if (TrygetValue && have >= amount )int left = have - amount;
+
+
         if (left == 0) inv.RemoveItem(item);
 
         else inv.UpdateItem(item,amount);
