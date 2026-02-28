@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 public class Player
 {
     
-public int level = 0 ;
-public int healt;
+private int level = 0 ;
+private int healt;
 public int AttackPower;
 private InventorySystems inv;
 
@@ -34,15 +34,28 @@ public Player(int healt, int AttackPower, InventorySystems inv)
             Console.WriteLine("Toplanacak eşya yok.");
             return;
         }
-
+        
         foreach (string item in floor.collectableItems)
         {
 
+        if(!inv.IsFull()){
             inv.AddToInventory(item);
             Console.WriteLine("Toplanan Eşya: " + item);
+
         }
 
-            floor.collectableItems.Clear();
+        else if(inv.ReturnKey(item))
+            {
+            inv.AddToInventory(item);
+            Console.WriteLine("Toplanan Eşya: " + item);
+            }
+            
+         
+        }
+         floor.ClearFloor(); 
+
+              
+           
     }
 
      public bool SpendFromInventory(string item, int amount)
@@ -50,23 +63,35 @@ public Player(int healt, int AttackPower, InventorySystems inv)
     {
         bool TrygetValue = inv.ReturnKey(item);
         int have = inv.ReturnHave(item);
+        int left;
 
-
-        if (!TrygetValue || have < amount) return false;
-
-        else if (TrygetValue && have >= amount )int left = have - amount;
-
-
-        if (left == 0) inv.RemoveItem(item);
-
-        else inv.UpdateItem(item,amount);
         
-        return true;
+
+        if (TrygetValue && have >= amount )
+        {
+            left = have - amount;
+
+            if (left == 0) inv.RemoveItem(item);
+
+            else {
+                
+                inv.UpdateItem (item,amount);
+                
+                }
+
+            return true;
+
+        }else return false;
+
+
+        
+        
+       
     }
 
-    public void AddPlayerInventory(string item)
+    public void AddPlayerInventory(string item, int amount)
        {
-        inv.AddToInventory(item,1);
+        inv.AddToInventory(item,amount);
     }
 
 

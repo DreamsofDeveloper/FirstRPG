@@ -47,7 +47,7 @@
         // Malzemeler yeterliyse harca ve ürünü ekle
         if (player.SpendFromInventory("Stone", stone) && player.SpendFromInventory("Stick", stick))
         {
-            player.AddPlayerInventory(resultItem);
+            player.AddPlayerInventory(resultItem,1);
 
             Console.WriteLine($"{resultItem} oluşturuldu!");
         }

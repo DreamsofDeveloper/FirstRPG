@@ -2,9 +2,10 @@ using System;
 
 public abstract class Entity
 {
-    public string Name;
-    public int Hp;
-    public string[] ItemsForDrop;
+    protected string Name;
+    protected int Hp;
+    private int ReHp = 50;
+    protected string[] ItemsForDrop;
     public bool IsDead = false;
 
     Random random = new Random();
@@ -41,7 +42,7 @@ public abstract class Entity
         
     }
 
-    public string? DropItem()
+    private string? DropItem()
     {
         if (ItemsForDrop == null || ItemsForDrop.Length == 0)
         {
@@ -53,5 +54,16 @@ public abstract class Entity
 
         Console.WriteLine($"Düşen eşya: {droppedItem}");
         return droppedItem;
+    }
+
+
+    public void Respawn()
+    {
+        if (IsDead)
+        {
+            Hp = ReHp;
+            IsDead = false;
+        }
+
     }
 }

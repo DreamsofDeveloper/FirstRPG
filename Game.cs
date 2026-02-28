@@ -4,11 +4,15 @@ using System.Runtime.InteropServices;
 public class Game
 {
 
+    //Objeler
     private readonly Floor floor;
     private readonly InventorySystems inv;
     private readonly CraftSystem craft;
     private readonly Player player;
     private readonly Goblin enemy;
+
+
+    //Oyun yönetimi
 
 
 
@@ -52,12 +56,10 @@ public class Game
                       if (enemy.IsDead) // Test için yeniden canladırma
                         {
 
-                         enemy.Hp = 50;
-                         enemy.IsDead = false;
-                        }
+                         enemy.Respawn();
                     } 
+                    }
                     
-                     
                     break;
 
                 case "2":

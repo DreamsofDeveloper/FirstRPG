@@ -5,6 +5,9 @@ public class InventorySystems
 {
     private readonly Dictionary<string, int> inventory = new Dictionary<string, int>();
 
+    private int MaxStack = 999;
+    private int MaxSlot = 10; // ileride player geliştirmeleri ile arttırılabilir olacak.
+
   
 
     public void PrintInventory()
@@ -24,9 +27,15 @@ public class InventorySystems
  
 
     public void AddToInventory(string item, int amount = 1)
+
     {
+        
+
         if (inventory.ContainsKey(item)) inventory[item] += amount;
+
         else inventory[item] = amount;
+
+
     }
 
     public void UpdateItem(string item, int amount)
@@ -46,6 +55,7 @@ public class InventorySystems
         bool key = inventory.TryGetValue(value, out int have);
         return have;
     }
+    
     public bool ReturnKey(string value)
     {
        return inventory.TryGetValue(value, out int have);
@@ -53,10 +63,14 @@ public class InventorySystems
 
     }
 
-    public bool ReturnContainKey(string item)
+    public bool IsFull()
     {
-        return inventory.ContainsKey(item);
+        if (inventory.Count() < MaxSlot) return false;
+        else 
+        
+        {
+            Console.WriteLine("Çanta Dolu!");
+            return true;  }
     }
-
    
 }
