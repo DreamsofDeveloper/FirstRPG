@@ -66,7 +66,7 @@ public Player(int healt, int AttackPower, InventorySystems inv)
 
             else {
                 
-                inv.UpdateItem (item,amount);
+                inv.UpdateItem (item,left);
                 
                 }
 
