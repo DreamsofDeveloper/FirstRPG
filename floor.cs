@@ -5,11 +5,13 @@ using System.Runtime.CompilerServices;
 public class Floor
 {
 
-    private const int ClearCycle = 45;
+    // Zemin Kuralları
+    public const int FloorWeight = 50;
 
     
    
     public  List<string> collectableItems = new List<string>();
+  
 
 
     public void ItemsOnTheFloor(string droppedItem)
@@ -30,32 +32,44 @@ public class Floor
         collectableItems.Clear();       
     }
 
-    public void AutomaticCleaning () {
-
-      int Cycle =  ClearCycle;
-      int Remain1 = ClearCycle - ()
-        
-
-        if( ClearCycle == 20)
+    public bool IsWeight()
+    {
+        if (collectableItems.Count >= FloorWeight)
         {
-            Console.WriteLine ("Yerdeki itemler 25 döngü sonra silinecektir!!!");
-    
+
+            return true;
+               
             
-        }
-        else if( ClearCycle == 35)
-        {
-            Console.WriteLine ("Yerdeki itemler 10 döngü sonra silinecektir!!!");
-    
             
-        }
+        }else return false;
+    }
 
-        if (ClearCycle >= 45)
+    public int TurnCount()
+    {
+       return collectableItems.Count;
+    }
+
+
+    public void ShowItemsOnFloor()
+    {
+
+        if(collectableItems.Count==0) Console.WriteLine("Yerde Eşya Yok");
+
+        else foreach(string item in collectableItems)
         {
-            collectableItems.Clear();
-
+            
+            Console.WriteLine($"Yerdeki İtem: {item}");
         }
+
+    
         
     }
+
+    public void RemoveItem(string item)
+    {
+        collectableItems.Remove(item);
+    }
+  
 
    
 }

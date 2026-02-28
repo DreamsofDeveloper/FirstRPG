@@ -10,15 +10,16 @@ public class Game
     private readonly CraftSystem craft;
     private readonly Player player;
     private readonly Goblin enemy;
+    private readonly World world;
 
 
     //Oyun yönetimi
-
+    private int cycle;
 
 
     public Game()
     {
-        
+    world = new World();
     floor = new Floor();
     inv = new InventorySystems();
     craft = new CraftSystem();
@@ -38,10 +39,14 @@ public class Game
             "\n 2. Topla" +
             "\n 3. Envanter" +
             "\n 4. Craft" +
-            "\n 5. Çıkış\n";
+            "\n 5. Yerdeki İtemler" +
+            "\n 6. Çıkış\n";
 
         while (true)
         {
+            cycle++;
+            world.WorldRules(cycle,floor);
+
             Console.Write(menu);
             string? input = Console.ReadLine();
 
@@ -73,12 +78,16 @@ public class Game
                     break;
 
                 case "4":
-                    craft.CraftMenu(player);
+                    craft.CraftMenu(player,floor,inv);
                     break;
 
                 case "5":
+                    floor.ShowItemsOnFloor();
+                    break;
+
+                case "6":
                     Console.WriteLine("Çıkış Yapılıyor");
-                    return;
+                    return;    
 
                 default:
                     Console.WriteLine("Geçersiz seçim.");
@@ -87,5 +96,6 @@ public class Game
         }
     }
 
+ 
   
 }

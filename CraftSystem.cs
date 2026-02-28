@@ -5,7 +5,7 @@
 
   
   
-   public void CraftMenu(Player player)
+   public void CraftMenu(Player player,Floor floor, InventorySystems inv)
     {
         Console.WriteLine("---------------------------\n        Craft        \n---------------------------\n");
 
@@ -21,19 +21,19 @@
         switch (craftSelect)
         {
             case "1":
-                Craft("Stone Sword", stone: 3, stick: 1, player);
+                Craft("Stone Sword", stone: 3, stick: 1, player, floor, inv);
                 break;
 
             case "2":
-                Craft("Stone Axe", stone: 3, stick: 2 , player);
+                Craft("Stone Axe", stone: 3, stick: 2 , player, floor, inv);
                 break;
 
             case "3":
-                Craft("Stone Pickaxe", stone: 3, stick: 2, player);
+                Craft("Stone Pickaxe", stone: 3, stick: 2, player, floor, inv);
                 break;
 
             case "4":
-                Craft("Stone Shovel", stone: 1, stick: 2, player);
+                Craft("Stone Shovel", stone: 1, stick: 2, player, floor, inv);
                 break;
 
             default:
@@ -42,14 +42,24 @@
         }
     }
 
-    private void Craft(string resultItem, int stone, int stick, Player player)
+    private void Craft(string resultItem, int stone, int stick, Player player,Floor floor, InventorySystems inv)
     {
         // Malzemeler yeterliyse harca ve ürünü ekle
         if (player.SpendFromInventory("Stone", stone) && player.SpendFromInventory("Stick", stick))
         {
-            player.AddPlayerInventory(resultItem,1);
+            if (!inv.IsFull())
+            {
+                 player.AddPlayerInventory(resultItem,1);
+                 
+            }
+            else
+            {
+                floor.collectableItems.Add(resultItem);
+            }
+           
+           Console.WriteLine($"{resultItem} oluşturuldu!");
 
-            Console.WriteLine($"{resultItem} oluşturuldu!");
+            
         }
         else
         {

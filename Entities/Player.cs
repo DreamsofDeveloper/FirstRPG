@@ -27,36 +27,27 @@ public Player(int healt, int AttackPower, InventorySystems inv)
         
     }
 
-      public void CollectItems(Floor floor)
+     public void CollectItems(Floor floor)
+{
+    if (floor.collectableItems.Count == 0)
     {
-        if (floor.collectableItems.Count == 0)
-        {
-            Console.WriteLine("Toplanacak eşya yok.");
-            return;
-        }
-        
-        foreach (string item in floor.collectableItems)
-        {
-
-        if(!inv.IsFull()){
-            inv.AddToInventory(item);
-            Console.WriteLine("Toplanan Eşya: " + item);
-
-        }
-
-        else if(inv.ReturnKey(item))
-            {
-            inv.AddToInventory(item);
-            Console.WriteLine("Toplanan Eşya: " + item);
-            }
-            
-         
-        }
-         floor.ClearFloor(); 
-
-              
-           
+        Console.WriteLine("Toplanacak eşya yok.");
+        return;
     }
+
+    for (int i = floor.collectableItems.Count - 1; i >= 0; i--)
+    {
+        string item = floor.collectableItems[i];
+        bool canCollect = !inv.IsFull() || inv.ReturnKey(item);
+
+        if (canCollect)
+        {
+            inv.AddToInventory(item);
+            Console.WriteLine("Toplanan Eşya: " + item);
+            floor.collectableItems.RemoveAt(i);
+        }
+    }
+}
 
      public bool SpendFromInventory(string item, int amount)
        
@@ -91,7 +82,19 @@ public Player(int healt, int AttackPower, InventorySystems inv)
 
     public void AddPlayerInventory(string item, int amount)
        {
-        inv.AddToInventory(item,amount);
+
+        
+         if(!inv.IsFull()){
+            inv.AddToInventory(item,amount);
+            Console.WriteLine("Toplanan Eşya: " + item);
+
+        }
+
+        else if(inv.ReturnKey(item))
+            {
+            inv.AddToInventory(item,amount);
+            Console.WriteLine("Toplanan Eşya: " + item);
+            }
     }
 
 
