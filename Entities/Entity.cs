@@ -1,17 +1,18 @@
 using System;
+using FirstRPG.Entities.Items;
 
 public abstract class Entity
 {
     protected string Name;
     protected int Hp;
     private int ReHp = 50;
-    protected string[] ItemsForDrop;
+    protected List<Item> ItemsForDrop;
     public bool IsDead = false;
 
     Random random = new Random();
     Floor floor;
    
-    public Entity(string name, int hp, string[] itemsForDrop, Floor floor)
+    public Entity(string name, int hp, List<Item> itemsForDrop, Floor floor)
     {
         Name = name;
         Hp = hp;
