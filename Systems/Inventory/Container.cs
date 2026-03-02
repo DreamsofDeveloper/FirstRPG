@@ -13,7 +13,7 @@ private List<Array> slots = new List<Array>();
 
 
 private Dictionary<Array,int> container = new Dictionary<Array, int>();
-protected Item[] slot = new Item[_Capacity];
+protected Item[] slot;
 
 
 
@@ -50,7 +50,7 @@ public void AddItemInSlot(Item item)
 
 private void IsFull()
     {
-        if(slot.Length == _Capacity)
+        if(container.Count == _Capacity)
         {
             Console.WriteLine($"{ContainerName} Dolu");
             isFull = true;
