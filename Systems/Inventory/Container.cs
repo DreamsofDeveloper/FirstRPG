@@ -10,7 +10,10 @@ protected string ContainerName;
 private bool isFull;
 private List<Array> slots = new List<Array>();
 
-protected Item[] slot;
+
+
+private Dictionary<Array,int> container = new Dictionary<Array, int>();
+protected Item[] slot = new Item[_Capacity];
 
 
 
@@ -25,7 +28,7 @@ public Container(int _capacity, string container_name)
 
 public void AddItemInSlot(Item item)
     {
-        slot = new Item[_Capacity];
+        
         
         if(!isFull){
         for(int i=0; i<_Capacity; i++)
@@ -38,6 +41,7 @@ public void AddItemInSlot(Item item)
             else
             {
                 slot[i] = item;
+                
             }
         }
     }
