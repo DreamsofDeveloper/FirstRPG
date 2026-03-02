@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class InventorySystems
 {
     private readonly Dictionary<string, int> inventory = new Dictionary<string, int>();
-
-    private int MaxStack = 999;
     private int MaxSlot = 10; // ileride player geliştirmeleri ile arttırılabilir olacak.
 
   
@@ -72,5 +70,6 @@ public class InventorySystems
             Console.WriteLine("Çanta Dolu!");
             return true;  }
     }
+
    
 }

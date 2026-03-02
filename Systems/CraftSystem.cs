@@ -1,8 +1,10 @@
-  public class CraftSystem
+using FirstRPG.Entities.Items;
+
+public class CraftSystem
 {
     
    
-
+    ItemDatabase ItemDatabase = new ItemDatabase();
   
   
    public void CraftMenu(Player player,Floor floor, InventorySystems inv)

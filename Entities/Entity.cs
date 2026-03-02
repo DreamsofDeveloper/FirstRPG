@@ -6,18 +6,23 @@ public abstract class Entity
     protected string Name;
     protected int Hp;
     private int ReHp = 50;
-    protected List<Item> ItemsForDrop;
+    protected int[] ItemsForDrop;
     public bool IsDead = false;
 
     Random random = new Random();
     Floor floor;
+    ItemDropSystem itemDropSystem;
    
-    public Entity(string name, int hp, List<Item> itemsForDrop, Floor floor)
+
+
+   
+    public Entity(string name, int hp, int[] itemsForDrop, Floor floor)
     {
         Name = name;
         Hp = hp;
         ItemsForDrop = itemsForDrop;
         this.floor = floor;
+        itemDropSystem = new ItemDropSystem(floor);
     }
 
     public void TakeDamage(int amount)
@@ -35,14 +40,21 @@ public abstract class Entity
     {
         IsDead = true;
         Console.WriteLine($"{Name} öldü!");
-                            
+
+
+        for(int i = 0; i < ItemsForDrop.Length; i++)
+        {
+            itemDropSystem.DropItem(ItemsForDrop[i],Name);
+        }
+
+        /*                  
         string droppedItem = DropItem();
         floor.ItemsOnTheFloor(droppedItem);
-
+        */
                         
         
     }
-
+/*
     private string? DropItem()
     {
         if (ItemsForDrop == null || ItemsForDrop.Length == 0)
@@ -57,7 +69,7 @@ public abstract class Entity
         return droppedItem;
     }
 
-
+*/
     public void Respawn()
     {
         if (IsDead)

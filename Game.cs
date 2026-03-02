@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using FirstRPG.Entities.Items;
 
 public class Game
 {
@@ -11,8 +12,7 @@ public class Game
     private readonly Player player;
     private readonly Goblin enemy;
     private readonly World world;
-
-
+    
     //Oyun yönetimi
     private int cycle;
 
@@ -24,10 +24,9 @@ public class Game
     inv = new InventorySystems();
     craft = new CraftSystem();
 
-
-    //Entities
-    player = new Player(50, 50,inv);
+    player = new Player(100, 50, inv);
     enemy = new Goblin(floor);
+
     
     }
     

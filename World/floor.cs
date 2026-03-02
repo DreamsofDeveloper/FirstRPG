@@ -14,7 +14,7 @@ public class Floor
   
 
 
-    public void ItemsOnTheFloor(string droppedItem)
+    public void ItemsOnTheFloor(string droppedItem, string owner)
     {
         if (string.IsNullOrEmpty(droppedItem))
         {
@@ -23,6 +23,7 @@ public class Floor
         }
 
         collectableItems.Add(droppedItem);
+        Console.WriteLine($"{owner}'den yere düşen eşya: {droppedItem}");
     
     }
 
