@@ -5,6 +5,7 @@ public class InventorySystems
 {
     private readonly Dictionary<string, int> inventory = new Dictionary<string, int>();
     private int MaxSlot = 10; // ileride player geliştirmeleri ile arttırılabilir olacak.
+    
 
   
 

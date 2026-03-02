@@ -9,7 +9,7 @@ public class Weapon : Item
    public const bool isStackable = false;
    public const bool  isDroppable = true;
    public const int maxStack = 1;
-   public const string type = "Weapon";
+   public const ItemType type = ItemType.Weapon;
 
    public int Damage {get; set;}
    public int Durability {get; set;}

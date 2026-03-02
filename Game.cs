@@ -12,6 +12,7 @@ public class Game
     private readonly Player player;
     private readonly Goblin enemy;
     private readonly World world;
+    private readonly PlayerBag playerbag;
     
     //Oyun yönetimi
     private int cycle;
@@ -23,8 +24,9 @@ public class Game
     floor = new Floor();
     inv = new InventorySystems();
     craft = new CraftSystem();
+    playerbag = new PlayerBag();
 
-    player = new Player(100, 50, inv);
+    player = new Player(100, 50, inv,playerbag);
     enemy = new Goblin(floor);
 
     

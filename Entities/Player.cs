@@ -10,12 +10,15 @@ private int level = 0 ;
 private int healt;
 public int AttackPower;
 private InventorySystems inv;
+private PlayerBag bag;
 
-public Player(int healt, int AttackPower, InventorySystems inv)
+public Player(int healt, int AttackPower, InventorySystems inv,PlayerBag Bag)
     {
         this.healt = healt;
         this.AttackPower = AttackPower;
         this.inv = inv;
+        bag = Bag;
+        
     }
   
 
@@ -45,6 +48,8 @@ public Player(int healt, int AttackPower, InventorySystems inv)
             inv.AddToInventory(item);
             Console.WriteLine("Toplanan Eşya: " + item);
             floor.collectableItems.RemoveAt(i);
+            bag.AddItemInSlot(item); // item türünden bir ekleme olacak
+            
         }
     }
 }

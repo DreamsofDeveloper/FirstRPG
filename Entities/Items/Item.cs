@@ -11,7 +11,7 @@ namespace FirstRPG.Entities.Items
         public string Rarity { get; }
         public bool IsSellable { get; }
         public bool IsDroppable { get; }
-        public string Type { get; }
+        public ItemType Type { get; }
 
         public Item(
             int id,
@@ -23,7 +23,7 @@ namespace FirstRPG.Entities.Items
             string rarity,
             bool isSellable,
             bool isDroppable,
-            string type)
+            ItemType type)
         {
             Id = id;
             Name = name;
@@ -36,5 +36,13 @@ namespace FirstRPG.Entities.Items
             IsDroppable = isDroppable;
             Type = type;
         }
+    }
+
+    public enum ItemType
+    {
+        Potion,
+        Weapon,
+        Armor,
+        Material
     }
 }
