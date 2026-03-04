@@ -4,7 +4,7 @@ using FirstRPG.Entities.Items;
 public class PlayerBag : Container
 {
 
-    private const int _capacity = 5;
+    private const int _capacity = 10;
     protected const string Name = "Çanta";
     public PlayerBag() : base(_capacity, Name )
     {

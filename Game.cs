@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using FirstRPG.Entities.Items;
 
@@ -7,7 +8,6 @@ public class Game
 
     //Objeler
     private readonly Floor floor;
-    private readonly InventorySystems inv;
     private readonly CraftSystem craft;
     private readonly Player player;
     private readonly Goblin enemy;
@@ -22,11 +22,11 @@ public class Game
     {
     world = new World();
     floor = new Floor();
-    inv = new InventorySystems();
-    craft = new CraftSystem();
     playerbag = new PlayerBag();
+    craft = new CraftSystem();
+   
 
-    player = new Player(100, 50, inv,playerbag);
+    player = new Player(100, 50,playerbag,floor);
     enemy = new Goblin(floor);
 
     
@@ -75,11 +75,11 @@ public class Game
                     break;
 
                 case "3":
-                    inv.PrintInventory();
+                    playerbag.Print();
                     break;
 
                 case "4":
-                    craft.CraftMenu(player,floor,inv);
+                    craft.CraftMenu(player,floor,playerbag);
                     break;
 
                 case "5":

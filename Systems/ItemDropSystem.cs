@@ -53,7 +53,7 @@ public ItemDropSystem(Floor floor)
 
         if (id == item.Id)
         {
-            floor.ItemsOnTheFloor(item.Name,owner);
+            floor.ItemsOnTheFloor(item , owner);
         }
     }
 }

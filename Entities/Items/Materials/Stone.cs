@@ -7,7 +7,7 @@ namespace FirstRPG.Entities.Items.Materials
     public  const string Name = "Stone";
     public  const string Description = "Yerden toplanabilen sıradan taş. Basit craft işlemlerinde kullanılır. ";
     public  const int Value = 2;
-    public  const int MaxStack = 999;
+    public  const int MaxStack = 5;
     public  const string Rarity = "Low";
     public  const bool IsSellable = true;
 

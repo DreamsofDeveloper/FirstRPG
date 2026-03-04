@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using FirstRPG.Entities.Items;
 
 
 public class Player
@@ -9,14 +10,12 @@ public class Player
 private int level = 0 ;
 private int healt;
 public int AttackPower;
-private InventorySystems inv;
 private PlayerBag bag;
 
-public Player(int healt, int AttackPower, InventorySystems inv,PlayerBag Bag)
+public Player(int healt, int AttackPower,PlayerBag Bag,Floor floor)
     {
         this.healt = healt;
         this.AttackPower = AttackPower;
-        this.inv = inv;
         bag = Bag;
         
     }
@@ -40,66 +39,31 @@ public Player(int healt, int AttackPower, InventorySystems inv,PlayerBag Bag)
 
     for (int i = floor.collectableItems.Count - 1; i >= 0; i--)
     {
-        string item = floor.collectableItems[i];
-        bool canCollect = !inv.IsFull() || inv.ReturnKey(item);
+        var item = floor.collectableItems[i];
+      
+           
+            int left = bag.AddItem(item,1);
 
-        if (canCollect)
-        {
-            inv.AddToInventory(item);
-            Console.WriteLine("Toplanan Eşya: " + item);
+            if(left > 0)
+            {
+                return;
+            }
+             Console.WriteLine("Toplanan Eşya: " + item.Name);
             floor.collectableItems.RemoveAt(i);
-            bag.AddItemInSlot(item); // item türünden bir ekleme olacak
             
-        }
+            
+    
     }
 }
 
-     public bool SpendFromInventory(string item, int amount)
-       
-    {
-        bool TrygetValue = inv.ReturnKey(item);
-        int have = inv.ReturnHave(item);
-        int left;
-
-        
-
-        if (TrygetValue && have >= amount )
-        {
-            left = have - amount;
-
-            if (left == 0) inv.RemoveItem(item);
-
-            else {
-                
-                inv.UpdateItem (item,left);
-                
-                }
-
-            return true;
-
-        }else return false;
 
 
-        
-        
-       
-    }
-
-    public void AddPlayerInventory(string item, int amount)
+    public int AddPlayerInventory(Item item, int amount)
        {
+       int left =  bag.AddItem(item,amount);
 
-        
-         if(!inv.IsFull()){
-            inv.AddToInventory(item,amount);
-            Console.WriteLine("Toplanan Eşya: " + item);
+        return left;
 
-        }
-
-        else if(inv.ReturnKey(item))
-            {
-            inv.AddToInventory(item,amount);
-            Console.WriteLine("Toplanan Eşya: " + item);
-            }
     }
 
 
