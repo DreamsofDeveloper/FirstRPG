@@ -56,16 +56,22 @@ public class CraftSystem
     private void Craft(Item resultItem, int neededstone, int neededstick, Player player,Floor floor, PlayerBag bag)
     {
         // Malzemeler yeterliyse harca ve ürünü ekle
+if(bag.ItemExist(1001) && bag.ItemExist(1003)){
        if (bag.SpendFromInventory(1001, neededstone) && bag.SpendFromInventory(1003, neededstick))
 {
           Console.WriteLine($"{resultItem.Name} oluşturuldu!");
           int Isadded = player.AddPlayerInventory(resultItem, 1);
           if (Isadded > 0) floor.collectableItems.Add(resultItem);
-}
-else
+}else
 {
     Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok!");
 }
+
+}else
+{
+    Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok!");
+}
+
     }
 
     private Item SelectItem(int itemId)
