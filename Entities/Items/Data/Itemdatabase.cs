@@ -6,7 +6,8 @@ namespace FirstRPG.Entities.Items
     public class ItemDatabase
     {
         private List<Item> items = new List<Item>();
-
+        
+       
         public ItemDatabase()
         {
             items.Add(new Stone());
@@ -21,11 +22,13 @@ namespace FirstRPG.Entities.Items
         
         }
     }
+     public enum ItemsId
+        {
+            Stone = 1001,
+            Stick = 1003,
+            Wooden_Sword = 2001
+            
+        }
 
-    public  enum ItemsId
-    {
-        Stone = 1001,
-
-
-    }
-}
+  
+}  

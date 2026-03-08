@@ -6,6 +6,7 @@ public class CraftSystem
    
    private readonly ItemDatabase itemdatabase;
    private readonly List<Item> allItems;
+   
 
     
   
@@ -16,7 +17,7 @@ public class CraftSystem
 
 
     }
-   public void CraftMenu(Player player,Floor floor, PlayerBag bag)
+   public void CraftMenu(Player player,Floor floor, Bag bag)
     {
         Console.WriteLine("---------------------------\n        Craft        \n---------------------------\n");
 
@@ -32,7 +33,7 @@ public class CraftSystem
         switch (craftSelect)
         {
             case "1":
-                Craft(SelectItem(2001), neededstone: 3, neededstick: 1, player, floor, bag);
+                Craft(SelectItem((int)ItemsId.Wooden_Sword), neededstone: 3, neededstick: 1, player, floor, bag);
                 break;
         /*
             case "2":
@@ -53,10 +54,10 @@ public class CraftSystem
         }
     }
 
-    private void Craft(Item resultItem, int neededstone, int neededstick, Player player,Floor floor, PlayerBag bag)
+    private void Craft(Item resultItem, int neededstone, int neededstick, Player player,Floor floor, Bag bag)
     {
         // Malzemeler yeterliyse harca ve ürünü ekle
-if(bag.ItemExist(1001) && bag.ItemExist(1003)){
+if(bag.ItemExist((int)ItemsId.Stone) && bag.ItemExist((int) ItemsId.Stick)){
        if (bag.SpendFromInventory(1001, neededstone) && bag.SpendFromInventory(1003, neededstick))
 {
           Console.WriteLine($"{resultItem.Name} oluşturuldu!");

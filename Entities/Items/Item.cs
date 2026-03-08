@@ -12,6 +12,7 @@ namespace FirstRPG.Entities.Items
         public bool IsSellable { get; }
         public bool IsDroppable { get; }
         public ItemType Type { get; }
+        public bool Weareble{get;}
 
         public Item(
             int id,
@@ -23,6 +24,7 @@ namespace FirstRPG.Entities.Items
             string rarity,
             bool isSellable,
             bool isDroppable,
+            bool weareble,
             ItemType type)
         {
             Id = id;
@@ -34,6 +36,7 @@ namespace FirstRPG.Entities.Items
             Rarity = rarity;
             IsSellable = isSellable;
             IsDroppable = isDroppable;
+            Weareble = weareble;
             Type = type;
         }
     }
@@ -45,4 +48,7 @@ namespace FirstRPG.Entities.Items
         Armor,
         Material
     }
+
+
+
 }

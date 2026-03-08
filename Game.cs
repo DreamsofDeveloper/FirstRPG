@@ -12,7 +12,7 @@ public class Game
     private readonly Player player;
     private readonly Goblin enemy;
     private readonly World world;
-    private readonly PlayerBag playerbag;
+    private readonly Bag playerbag;
     
     //Oyun yönetimi
     private int cycle;
@@ -22,11 +22,11 @@ public class Game
     {
     world = new World();
     floor = new Floor();
-    playerbag = new PlayerBag();
+    playerbag = new Bag();
     craft = new CraftSystem();
    
 
-    player = new Player(100, 50,playerbag,floor);
+    player = new Player("Kahraman", 50 , 100 , floor , playerbag);
     enemy = new Goblin(floor);
 
     
@@ -76,6 +76,7 @@ public class Game
 
                 case "3":
                     playerbag.Print();
+                    player.Use();
                     break;
 
                 case "4":

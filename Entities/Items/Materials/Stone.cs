@@ -3,7 +3,7 @@ namespace FirstRPG.Entities.Items.Materials
     public class Stone : Material
     {
 
-    public const int Id = 1001;
+    public const int Id = (int) ItemsId.Stone;
     public  const string Name = "Stone";
     public  const string Description = "Yerden toplanabilen sıradan taş. Basit craft işlemlerinde kullanılır. ";
     public  const int Value = 2;

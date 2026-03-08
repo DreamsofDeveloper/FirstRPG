@@ -143,6 +143,30 @@ public int ItemAmount(int itemId)
     }
 
 
+    public Item TakeItem(int slotnum)
+    {
+        if(slotnum -1 > _Slots.Count || slotnum -1 < 0  ){
+
+             Console.WriteLine("Değer içerik dışı");
+
+              return null;
+              
+    }
+        else{
+
+        var holdingitem = _Slots[slotnum].Item!;
+
+        if(holdingitem == null)   _Slots[slotnum].RemoveFromSlot(1);
+        else return null;
+
+        return holdingitem;
+
+        }
+    }
+
+
+
+    
 
 
 
