@@ -143,26 +143,27 @@ public int ItemAmount(int itemId)
     }
 
 
-    public Item TakeItem(int slotnum)
+    public Item? GetItem(int slotnum)
+{
+    int index = slotnum - 1;
+
+    if (index < 0 || index >= _Slots.Count)
     {
-        if(slotnum -1 > _Slots.Count || slotnum -1 < 0  ){
-
-             Console.WriteLine("Değer içerik dışı");
-
-              return null;
-              
+        Console.WriteLine("Değer içerik dışı");
+        return null;
     }
-        else{
 
-        var holdingitem = _Slots[slotnum].Item!;
+    var holdingitem = _Slots[index].Item;
 
-        if(holdingitem == null)   _Slots[slotnum].RemoveFromSlot(1);
-        else return null;
-
-        return holdingitem;
-
-        }
+    if (holdingitem == null)
+    {
+        Console.WriteLine("Bu slot boş.");
+        return null;
     }
+
+    _Slots[index].RemoveFromSlot(1);
+    return holdingitem;
+}
 
 
 

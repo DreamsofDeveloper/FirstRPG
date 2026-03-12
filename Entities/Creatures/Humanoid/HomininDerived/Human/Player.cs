@@ -30,31 +30,53 @@ private List<Item> clothes = new List<Item>();
 
      public void CollectItems(Floor floor)
 {
+
+
     if (floor.collectableItems.Count == 0)
     {
         Console.WriteLine("Toplanacak eşya yok.");
         return;
     }
 
-    for (int i = floor.collectableItems.Count - 1; i >= 0; i--)
-    {
-        var item = floor.collectableItems[i];
-      
-           
-            int left = bag.AddItem(item,1);
 
-            if(left > 0)
+// Yerden item toplama ve yerde kalan itemleri silme ya da değereni güncelleme
+
+    List<Item> ItemsToRemove = new List<Item>();
+    Dictionary<Item, int> ItemToUpdate = new Dictionary<Item, int>();
+
+    foreach( var pair in floor.collectableItems){
+
+        int left  = bag.AddItem(pair.Key, pair.Value);
+
+        if(left == 0)
             {
-                return;
+                Console.WriteLine($"Toplanan Eşya {pair.Key.Name} X {pair.Value}");
+                ItemsToRemove.Add(pair.Key);
             }
-             Console.WriteLine("Toplanan Eşya: " + item.Name);
-            floor.collectableItems.RemoveAt(i);
-            
-            
-    
+        else if(left < pair.Value && left > 0)
+            {
+                int collectedAmount = pair.Value - left;
+                Console.WriteLine($"Toplanan Eşya {pair.Key.Name} X {collectedAmount}");
+                ItemToUpdate[pair.Key] = left;
+                
+            }else
+                {
+                     return;
+                    }
     }
-}
 
+foreach(var pair in ItemToUpdate)
+        {
+            floor.collectableItems[pair.Key] = pair.Value;
+        }
+
+foreach(var item in ItemsToRemove)
+        {
+            floor.collectableItems.Remove(item);
+        }
+
+
+}
 
 
     public int AddPlayerInventory(Item item, int amount)
@@ -65,34 +87,48 @@ private List<Item> clothes = new List<Item>();
 
     }
 
-     public void Use()
+   public void Use()
+{
+    Console.Write("Kullanmak istediğiniz eşyanın slot numarası, çıkış için '999' : ");
+    bool input = int.TryParse(Console.ReadLine(), out int slot);
+    if(slot == 999) return;
+
+    if (!input)
     {
-      Console.Write("Kullanmak istediğiniz eşyanın slot numarası: ");
-      bool input = int.TryParse(Console.ReadLine(), out int inpt);
-
-        if (input)
-        {
-            Item ItemForUse = bag.TakeItem(inpt);
-
-            if (ItemForUse != null)
-            {
-                if(ItemForUse.Type == ItemType.Armor || ItemForUse.Type == ItemType.Potion || ItemForUse.Type == ItemType.Weapon)
-                {
-                    clothes.Add(ItemForUse);
-                    Console.WriteLine($"{ItemForUse.Name} eşyası kullanıldı..");
-
-                }else Console.WriteLine($"{ItemForUse.Name} eşyası, {ItemForUse.Description} Satmak için ve Üretim için kullanılabilir. ");
-
-            }
-        }
-        else
-        {
-            Console.WriteLine("Lütfen geçerli bir numara giriniz!");
-        }
-
-
-        
+        Console.WriteLine("Lütfen geçerli bir numara giriniz!");
+        return;
     }
+
+    Item? item = bag.GetItem(slot);
+
+    if (item == null)
+    {
+        Console.WriteLine("Bu slot boş.");
+        return;
+    }
+
+    switch (item.Type)
+    {
+        case ItemType.Weapon:
+            clothes.Add(item);
+            Console.WriteLine($"{item.Name} kuşanıldı.");
+            break;
+
+        case ItemType.Armor:
+            clothes.Add(item);
+            Console.WriteLine($"{item.Name} giyildi.");
+            break;
+
+        case ItemType.Potion:
+            clothes.Add(item);
+            Console.WriteLine($"{item.Name} kullanıldı.");
+            break;
+
+        default:
+            Console.WriteLine($"{item.Name} bu şekilde kullanılamaz.");
+            break;
+    }
+}
 
 
 

@@ -11,7 +11,7 @@ public class Floor
 
     
    
-    public  List<Item> collectableItems = new List<Item>();
+    public  Dictionary<Item, int> collectableItems = new Dictionary<Item, int>();
   
 
 
@@ -23,9 +23,23 @@ public class Floor
             return;
         }
 
-        collectableItems.Add(droppedItem);
+        AddItemToFloor(droppedItem, 1);
         Console.WriteLine($"{owner}'den yere düşen eşya: {droppedItem.Name}");
     
+    }
+
+
+    public void AddItemToFloor(Item item, int amuont)
+    {
+        if (collectableItems.ContainsKey(item))
+        {
+            collectableItems[item]+= amuont;
+        }
+        else
+        {
+            collectableItems[item] = amuont;
+        }
+
     }
 
     public void ClearFloor()
@@ -57,10 +71,10 @@ public class Floor
 
         if(collectableItems.Count==0) Console.WriteLine("Yerde Eşya Yok");
 
-        else foreach(Item item in collectableItems)
+        else foreach(var item in collectableItems)
         {
             
-            Console.WriteLine($"Yerdeki İtem: {item.Name}");
+            Console.WriteLine($"Yerdeki İtem: {item.Key.Name} X {item.Value}");
         }
 
     

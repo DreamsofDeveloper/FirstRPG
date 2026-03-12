@@ -62,7 +62,7 @@ if(bag.ItemExist((int)ItemsId.Stone) && bag.ItemExist((int) ItemsId.Stick)){
 {
           Console.WriteLine($"{resultItem.Name} oluşturuldu!");
           int Isadded = player.AddPlayerInventory(resultItem, 1);
-          if (Isadded > 0) floor.collectableItems.Add(resultItem);
+          if (Isadded > 0) floor.collectableItems.Add(resultItem,1);
 }else
 {
     Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok!");
@@ -75,7 +75,7 @@ if(bag.ItemExist((int)ItemsId.Stone) && bag.ItemExist((int) ItemsId.Stick)){
 
     }
 
-    private Item SelectItem(int itemId)
+    private Item? SelectItem(int itemId)
     {
         foreach(Item item in allItems)
         {
