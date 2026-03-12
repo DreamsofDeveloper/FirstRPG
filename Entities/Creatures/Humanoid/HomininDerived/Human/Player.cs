@@ -10,13 +10,13 @@ public class Player: Humanoid
 private int level = 0 ;
 private int healt;
 public double AttackPower;
-private Bag bag;
+private Bag bag = new Bag();
 private List<Item> clothes = new List<Item>();
 
-    public Player(string name,double attackpower, double hp, Floor floor,Bag Bag) : base(name, hp, floor)
+    public Player(string name,double attackpower, double hp, Floor floor) : base(name, hp, floor)
     {
         AttackPower = attackpower;
-        bag = Bag;
+      
 
     }
 
@@ -30,50 +30,9 @@ private List<Item> clothes = new List<Item>();
 
      public void CollectItems(Floor floor)
 {
-
-
-    if (floor.collectableItems.Count == 0)
-    {
-        Console.WriteLine("Toplanacak eşya yok.");
-        return;
-    }
-
-
-// Yerden item toplama ve yerde kalan itemleri silme ya da değereni güncelleme
-
-    List<Item> ItemsToRemove = new List<Item>();
-    Dictionary<Item, int> ItemToUpdate = new Dictionary<Item, int>();
-
-    foreach( var pair in floor.collectableItems){
-
-        int left  = bag.AddItem(pair.Key, pair.Value);
-
-        if(left == 0)
-            {
-                Console.WriteLine($"Toplanan Eşya {pair.Key.Name} X {pair.Value}");
-                ItemsToRemove.Add(pair.Key);
-            }
-        else if(left < pair.Value && left > 0)
-            {
-                int collectedAmount = pair.Value - left;
-                Console.WriteLine($"Toplanan Eşya {pair.Key.Name} X {collectedAmount}");
-                ItemToUpdate[pair.Key] = left;
-                
-            }else
-                {
-                     return;
-                    }
-    }
-
-foreach(var pair in ItemToUpdate)
-        {
-            floor.collectableItems[pair.Key] = pair.Value;
-        }
-
-foreach(var item in ItemsToRemove)
-        {
-            floor.collectableItems.Remove(item);
-        }
+            if(floor.IsthereItems()) floor.GiveItems(bag);
+            else Console.WriteLine("Yerde Toplanacak Eşya Yok..!");
+   
 
 
 }
@@ -103,11 +62,11 @@ foreach(var item in ItemsToRemove)
 
     if (item == null)
     {
-        Console.WriteLine("Bu slot boş.");
+       
         return;
     }
 
-    switch (item.Type)
+    switch (item!.Type)
     {
         case ItemType.Weapon:
             clothes.Add(item);
@@ -130,6 +89,40 @@ foreach(var item in ItemsToRemove)
     }
 }
 
+// Çanta
 
+
+public bool LookInBag(int itemId)
+    {
+        return bag.ItemExist(itemId);
+    }
+
+public bool SpendFromBag(int itemId, int amount)
+    {
+        return bag.SpendFromInventory(itemId, amount);
+        
+    }
+
+public void ReadTheBag()
+    {
+        bag.Print();
+
+      
+        Console.WriteLine("1.Kullan        2.Yere At        3.Sil");
+        string input = Console.ReadLine();
+
+        switch (input)
+        {
+        case "1":
+                  
+              Use();    
+                  
+                  break;
+        default:
+          Console.WriteLine("Böyle bir seçenek yok!");
+        break;
+
+        }
+    }
 
 }

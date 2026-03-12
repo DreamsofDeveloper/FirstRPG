@@ -17,7 +17,7 @@ public class CraftSystem
 
 
     }
-   public void CraftMenu(Player player,Floor floor, Bag bag)
+   public void CraftMenu(Player player,Floor floor)
     {
         Console.WriteLine("---------------------------\n        Craft        \n---------------------------\n");
 
@@ -33,7 +33,7 @@ public class CraftSystem
         switch (craftSelect)
         {
             case "1":
-                Craft(SelectItem((int)ItemsId.Wooden_Sword), neededstone: 3, neededstick: 1, player, floor, bag);
+                Craft(SelectItem((int)ItemsId.Wooden_Sword), neededstone: 3, neededstick: 1, player, floor);
                 break;
         /*
             case "2":
@@ -54,15 +54,15 @@ public class CraftSystem
         }
     }
 
-    private void Craft(Item resultItem, int neededstone, int neededstick, Player player,Floor floor, Bag bag)
+    private void Craft(Item resultItem, int neededstone, int neededstick, Player player,Floor floor)
     {
         // Malzemeler yeterliyse harca ve ürünü ekle
-if(bag.ItemExist((int)ItemsId.Stone) && bag.ItemExist((int) ItemsId.Stick)){
-       if (bag.SpendFromInventory(1001, neededstone) && bag.SpendFromInventory(1003, neededstick))
+if(player.LookInBag((int)ItemsId.Stone) && player.LookInBag((int) ItemsId.Stick)){
+       if (player.SpendFromBag((int)ItemsId.Stone, neededstone) && player.SpendFromBag((int) ItemsId.Stick, neededstick))
 {
           Console.WriteLine($"{resultItem.Name} oluşturuldu!");
           int Isadded = player.AddPlayerInventory(resultItem, 1);
-          if (Isadded > 0) floor.collectableItems.Add(resultItem,1);
+          if (Isadded > 0) floor.AddItemToFloor(resultItem);
 }else
 {
     Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok!");

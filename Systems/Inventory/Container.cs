@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using FirstRPG.Entities.Items;
 
@@ -7,6 +8,8 @@ public abstract class Container
     
 private  int _Capacity;
 protected string ContainerName;
+private bool FullTextSize = false;
+private int? Lastitem = null;
 
 
 private readonly List<Slot> _Slots;
@@ -66,7 +69,18 @@ public Container(int _capacity, string container_name)
             amount -= put;
         } 
 
-        if(amount > 0 ) Console.WriteLine($"{ContainerName} dolu, item alınamadı !");
+        if (amount > 0)
+      {
+        if (Lastitem != item.Id)
+        {
+        Console.WriteLine($"{ContainerName} dolu, {item.Name} alınamadı!");
+        Lastitem = item.Id;
+        }
+    }
+     else
+    {
+           Lastitem = null;
+       }
         // Kalan miktar 0 dan büyük ise, çanta tamamen dolmuştur.
         return amount;
 

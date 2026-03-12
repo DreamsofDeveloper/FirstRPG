@@ -10,12 +10,13 @@ public class Floor
     public const int FloorWeight = 50;
 
     
-   
-    public  Dictionary<Item, int> collectableItems = new Dictionary<Item, int>();
+        private List<Item> ItemsOnTheFloor = new List<Item>();
+        private Dictionary<Item, int> givenitems = new Dictionary<Item, int>();
+        public bool isthereItems;
   
 
 
-    public void ItemsOnTheFloor(Item droppedItem, string owner)
+    public void FallingItem(Item droppedItem, string owner)
     {
         if (droppedItem == null)
         {
@@ -23,21 +24,22 @@ public class Floor
             return;
         }
 
-        AddItemToFloor(droppedItem, 1);
+        AddItemToFloor(droppedItem);
         Console.WriteLine($"{owner}'den yere düşen eşya: {droppedItem.Name}");
     
     }
 
 
-    public void AddItemToFloor(Item item, int amuont)
+    public void AddItemToFloor(Item item)
     {
-        if (collectableItems.ContainsKey(item))
+        if(item != null)
         {
-            collectableItems[item]+= amuont;
+            ItemsOnTheFloor.Add(item);
+
         }
         else
         {
-            collectableItems[item] = amuont;
+            Console.WriteLine("In the floor file, the parameter of the AddItemToFloor function is null.");
         }
 
     }
@@ -45,12 +47,12 @@ public class Floor
     public void ClearFloor()
 
     {
-        collectableItems.Clear();       
+        ItemsOnTheFloor.Clear();       
     }
 
     public bool IsWeight()
     {
-        if (collectableItems.Count >= FloorWeight)
+        if (ItemsOnTheFloor.Count >= FloorWeight)
         {
 
             return true;
@@ -62,19 +64,18 @@ public class Floor
 
     public int TurnCount()
     {
-       return collectableItems.Count;
+       return ItemsOnTheFloor.Count;
     }
 
 
     public void ShowItemsOnFloor()
     {
 
-        if(collectableItems.Count==0) Console.WriteLine("Yerde Eşya Yok");
+        if(ItemsOnTheFloor.Count==0) Console.WriteLine("Yerde Eşya Yok");
 
-        else foreach(var item in collectableItems)
+        foreach (var item in ItemsOnTheFloor)
         {
-            
-            Console.WriteLine($"Yerdeki İtem: {item.Key.Name} X {item.Value}");
+            Console.WriteLine($"Yerdeki Eşya: {item.Name}");
         }
 
     
@@ -83,9 +84,60 @@ public class Floor
 
     public void RemoveItem(Item item)
     {
-        collectableItems.Remove(item);
+        ItemsOnTheFloor.Remove(item);
     }
   
+    public List<Item> GetItemsOnTheFloor()
+    {
+        
+        return ItemsOnTheFloor;
+    }
+
+
+
+  public void GiveItems(Container container)
+    {
+         if (!IsthereItems())
+    {
+        return;
+    }
+        for(int i = ItemsOnTheFloor.Count - 1 ; i>= 0 ; i--)
+        {
+            
+                var item = ItemsOnTheFloor[i];
+                int left = container.AddItem(item,1);
+
+                if (left > 0) continue;
+
+                ItemsOnTheFloor.Remove(item);
+
+
+            if (givenitems.ContainsKey(item))
+            {
+                givenitems[item] ++;
+            }
+            else
+            {
+                givenitems[item] = 1;
+            }
+                
+
+        }
+
+        foreach(var items in givenitems)
+        {
+            Console.WriteLine($"{items.Key.Name} X {items.Value} toplandı.");
+        }
+        givenitems.Clear();
+
+    }
+
+
+    public bool IsthereItems()
+    {
+        if( ItemsOnTheFloor.Count == 0) return isthereItems = false;
+        else return isthereItems = true;
+    }
 
    
 }
