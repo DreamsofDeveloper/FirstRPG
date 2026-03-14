@@ -12,6 +12,7 @@ public class Game
     private readonly Player player;
     private readonly Goblin enemy;
     private readonly World world;
+    private readonly CombatSystem combat;
  
     
     //Oyun yönetimi
@@ -23,16 +24,17 @@ public class Game
     world = new World();
     floor = new Floor();
     craft = new CraftSystem();
+    combat = new CombatSystem();
    
 
-    player = new Player("Kahraman", 50 , 100 , floor);
+    player = new Player("Kahraman", floor);
     enemy = new Goblin(floor);
 
     
     }
     
 
-    public void Run()
+    public async Task RunAsync()
     {
         string menu =
             "\n 1. Saldır" +
@@ -47,25 +49,24 @@ public class Game
             cycle++;
             world.WorldRules(cycle,floor);
 
-            Console.Write(menu);
+            Console.Write(menu +  "\n Seçim: ");
             string? input = Console.ReadLine();
 
             switch (input)
             {
                 case "1":
-                    if (!enemy.IsDead)
-                    {
-                      player.Attack(); 
-                      enemy.TakeDamage(player.AttackPower);  
+                if (!player.IsDead && !enemy.IsDead)
+             {
+                    await combat.Combat(player, enemy);
+                    }else Console.WriteLine($"{player.Name} ölü, saldırı yapamaz!");
 
-                      if (enemy.IsDead) // Test için yeniden canladırma
-                        {
+                if (enemy.IsDead)
+            {
+                enemy.Respawn(); // test için
+                 }
 
-                         enemy.Respawn();
-                    } 
-                    }
-                    
-                    break;
+                     break;
+                   
 
                 case "2":
                    

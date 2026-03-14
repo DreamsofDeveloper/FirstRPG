@@ -7,8 +7,11 @@ public class ItemDropSystem
    private readonly List<Item> allItems;
    private readonly Floor floor;
 
+    public ItemDropSystem()
+    {
+    }
 
-public ItemDropSystem(Floor floor)
+    public ItemDropSystem(Floor floor)
     {
         itemdatabase = new ItemDatabase();
         allItems = itemdatabase.GetAllItems();
@@ -56,6 +59,11 @@ public ItemDropSystem(Floor floor)
             floor.FallingItem(item , owner);
         }
     }
+
+
+
+
+
 }
         
 

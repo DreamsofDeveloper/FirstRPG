@@ -1,1 +1,1 @@
-﻿new Game().Run();
+﻿await new Game().RunAsync();

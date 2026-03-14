@@ -39,15 +39,17 @@ namespace FirstRPG.Entities.Items
             Weareble = weareble;
             Type = type;
         }
+
+
+
+   
+
+
+
+
     }
 
-    public enum ItemType
-    {
-        Potion,
-        Weapon,
-        Armor,
-        Material
-    }
+ 
 
 
 

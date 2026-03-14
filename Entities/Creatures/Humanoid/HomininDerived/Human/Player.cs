@@ -8,25 +8,29 @@ public class Player: Humanoid
 {
     
 private int level = 0 ;
-private int healt;
-public double AttackPower;
-private Bag bag = new Bag();
-private List<Item> clothes = new List<Item>();
+private static int healt = 100;
+public static double Attackpower = 10;
+public static bool isdead = false;
+private static Bag bag = new Bag();
 
-    public Player(string name,double attackpower, double hp, Floor floor) : base(name, hp, floor)
+// body parts
+
+    public static  Armor? headArmor { get; set; }
+    public static  Armor? bodyArmor { get; set; }
+    public static  Armor? handArmor { get; set; }
+    public static  Armor? legArmor { get; set; }
+    public static  Armor? feetArmor { get; set; }
+    public static  Armor? shield { get; set; }
+    public static Weapon? equippedWeapon { get; set; }
+
+    public Player(string name, Floor floor) : 
+    base(name, healt, floor, bag, headArmor, bodyArmor, handArmor, legArmor, feetArmor, shield, equippedWeapon,Attackpower,isdead)
     {
-        AttackPower = attackpower;
-      
+        
+
 
     }
 
-    public void Attack()
-    {
-        
-        Console.WriteLine("Kahraman: Düşmana Saldırı Yapıldı!");
-        
-        
-    }
 
      public void CollectItems(Floor floor)
 {
@@ -66,28 +70,75 @@ private List<Item> clothes = new List<Item>();
         return;
     }
 
-    switch (item!.Type)
-    {
-        case ItemType.Weapon:
-            clothes.Add(item);
+   if(item is Weapon weapon)
+        {
+            equippedWeapon = weapon;
             Console.WriteLine($"{item.Name} kuşanıldı.");
-            break;
+            bag.RemoveItemFromSlot(slot,1);
+        }
+  else if(item is Armor armor)
+        {
+            switch (armor.ArmorType)
+            {
+                case EquipmentsType.HeadArmor:
+                    headArmor = armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
 
-        case ItemType.Armor:
-            clothes.Add(item);
-            Console.WriteLine($"{item.Name} giyildi.");
-            break;
+                    break;
+                case EquipmentsType.ChestArmor:
+                    bodyArmor = armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
 
-        case ItemType.Potion:
-            clothes.Add(item);
-            Console.WriteLine($"{item.Name} kullanıldı.");
-            break;
+                    break;
+                case EquipmentsType.LegArmor:
+                    legArmor= armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
 
-        default:
-            Console.WriteLine($"{item.Name} bu şekilde kullanılamaz.");
-            break;
-    }
+                    break;
+                case EquipmentsType.FeetArmor:
+                    feetArmor = armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
+
+                    break;
+                case EquipmentsType.HandArmor:
+                    handArmor = armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
+                    break;
+                case EquipmentsType.Shield:
+                    shield = armor;
+                    Console.WriteLine($"{item.Name} giyinildi.");
+                    bag.RemoveItemFromSlot(slot,1);
+
+                    break;
+            
+            
+            default:
+                break;
+            
+            
+            
+            
+            }
+        }
+    else if(item is Potion potion)
+        {
+            Console.WriteLine($"{item.Name} iksiri içildi. ");
+            bag.RemoveItemFromSlot(slot,1);
+        }
+
+
+
+
+
+    else Console.WriteLine($"{item.Name} bu şekilde kullanılamaz");
+
 }
+
 
 // Çanta
 

@@ -174,10 +174,14 @@ public int ItemAmount(int itemId)
         Console.WriteLine("Bu slot boş.");
         return null;
     }
-
-    _Slots[index].RemoveFromSlot(1);
     return holdingitem;
 }
+
+
+ public void RemoveItemFromSlot(int slotnum, int amount)
+    {
+        _Slots[slotnum].RemoveFromSlot(amount);
+    }
 
 
 

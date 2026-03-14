@@ -11,26 +11,29 @@ public class Goblin : Humanoid
     ItemDropSystem itemDropSystem;
 
 
+    private static int healt = 100;
+    public static double Attackpower = 8;
+    private static Bag bag = new Bag();
+    public static bool isdead = false;
 
+// body parts
 
-private const double BaseHp = 50;
-private const string BaseName = "Goblin";
-private int[] Items = {1001,1003};
+    public static  Armor? headArmor { get; set; }
+    public static  Armor? bodyArmor { get; set; }
+    public static  Armor? handArmor { get; set; }
+    public static  Armor? legArmor { get; set; }
+    public static  Armor? feetArmor { get; set; }
+    public static  Armor? shield { get; set; }
+    public static Weapon? equippedWeapon { get; set; }
 
-
-    public Goblin(Floor floor) : base(BaseName, BaseHp, floor)
-{
-    itemDropSystem = new ItemDropSystem(floor);
-}
-
-
-    public override void Die()
+    public Goblin ( Floor floor) : 
+    base("Goblin", healt, floor, bag, headArmor, bodyArmor, handArmor, legArmor, feetArmor, shield, equippedWeapon,Attackpower,isdead)
     {
-        base.Die();
-      for(int i = 0; i < Items.Length; i++)
-        {
-            itemDropSystem.DropItem(Items[i],Name);
-        } 
+        
+        itemDropSystem = new ItemDropSystem();
+
     }
+
+  
     
 }

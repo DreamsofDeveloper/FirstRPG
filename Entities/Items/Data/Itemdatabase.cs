@@ -12,7 +12,7 @@ namespace FirstRPG.Entities.Items
         {
             items.Add(new Stone());
             items.Add(new Stick());
-            items.Add(new Weapon(2001,"Wooden Sword","Ağaçtan yapılma bir kılıç.",10,"low","Sword",4,20,20,1));
+            items.Add(new WoodenSword());
             
         }
 
@@ -30,5 +30,34 @@ namespace FirstRPG.Entities.Items
             
         }
 
-  
+     public enum ItemType
+    {
+        Potion,
+        Weapon,
+        Armor,
+        Material
+    }
+    public enum EquipmentsType
+    {
+        //Armor
+        HeadArmor,
+        ChestArmor,
+        HandArmor,
+        LegArmor,
+        FeetArmor,
+        Shield,
+
+
+
+        //Weapon 
+        Sword,
+        Axe,
+        Bow,
+        Staff,
+        Dagger,
+        Spear,
+        Shovel
+
+
+    }
 }  
