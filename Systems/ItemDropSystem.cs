@@ -26,38 +26,12 @@ public class ItemDropSystem
 
 
 
- public void DropItem(int id, string owner)
+ public void DropItem(Item item, string owner)
+
 {
-    if (itemdatabase == null)
-    {
-        Console.WriteLine("itemdatabase null");
-        return;
-    }
 
-    if (allItems == null)
-    {
-        Console.WriteLine("allItems null");
-        return;
-    }
-
-    if (floor == null)
-    {
-        Console.WriteLine("floor null");
-        return;
-    }
-
-    foreach (Item item in allItems)
-    {
-        if (item == null)
-        {
-            Console.WriteLine("Listede null item var");
-            continue;
-        }
-
-        if (id == item.Id)
-        {
             floor.FallingItem(item , owner);
-        }
+        
     }
 
 
@@ -67,7 +41,7 @@ public class ItemDropSystem
 }
         
 
-    }
+
 
 
 

@@ -8,24 +8,27 @@ namespace FirstRPG.Entities.Items
         public int Value { get; }
         public bool IsStackable { get; }
         public int MaxStack { get; }
-        public string Rarity { get; }
+        public ItemRarity Rarity { get; }
         public bool IsSellable { get; }
         public bool IsDroppable { get; }
         public ItemType Type { get; }
-        public bool Weareble{get;}
+        public bool Wearable { get; }
+        public BaseMaterial BaseMaterial{ get; }
 
-        public Item(
+        protected Item(
             int id,
             string name,
             string description,
             int value,
             bool isStackable,
             int maxStack,
-            string rarity,
+            ItemRarity rarity,
             bool isSellable,
             bool isDroppable,
-            bool weareble,
-            ItemType type)
+            bool wearable,
+            ItemType type,
+            BaseMaterial basematerial
+            )
         {
             Id = id;
             Name = name;
@@ -36,21 +39,9 @@ namespace FirstRPG.Entities.Items
             Rarity = rarity;
             IsSellable = isSellable;
             IsDroppable = isDroppable;
-            Weareble = weareble;
+            Wearable = wearable;
             Type = type;
+            BaseMaterial = basematerial;
         }
-
-
-
-   
-
-
-
-
     }
-
- 
-
-
-
 }

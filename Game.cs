@@ -31,6 +31,8 @@ public class Game
     enemy = new Goblin(floor);
 
     
+
+    
     }
     
 
@@ -70,7 +72,7 @@ public class Game
 
                 case "2":
                    
-                    player.CollectItems(floor);
+                    player.CollectItems();
                    
                     break;
 

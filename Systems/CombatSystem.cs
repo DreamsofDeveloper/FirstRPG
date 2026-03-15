@@ -11,8 +11,8 @@ public class CombatSystem
         {
             Console.WriteLine($"{attacker.Name} ölü, saldırı olamaz!");
         }
-        double attackerDamage = attacker.AttackPower;
-        double targetDamage = target.AttackPower;
+        double attackerDamage = attacker.CalculateAttackPower;
+        double targetDamage = target.CalculateAttackPower;
 
         while (!attacker.IsDead && !target.IsDead)
         {

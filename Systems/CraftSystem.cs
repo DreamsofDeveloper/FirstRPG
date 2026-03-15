@@ -29,11 +29,12 @@ public class CraftSystem
 
         Console.WriteLine(craftMenu);
         string? craftSelect = Console.ReadLine();
+        Console.Write("Seçim: ");
 
         switch (craftSelect)
         {
             case "1":
-                Craft(SelectItem((int)ItemsId.Wooden_Sword), neededstone: 3, neededstick: 1, player, floor);
+                Craft(itemdatabase.CreateItem(ItemsId.Wooden_Sword), neededstone: 3, neededstick: 1, player, floor);
                 break;
         /*
             case "2":
@@ -75,16 +76,6 @@ if(player.LookInBag((int)ItemsId.Stone) && player.LookInBag((int) ItemsId.Stick)
 
     }
 
-    private Item? SelectItem(int itemId)
-    {
-        foreach(Item item in allItems)
-        {
-            if(item.Id == itemId)
-            {
-                return item;
-            }
-        }
-        return null;
-    }
+  
 
     }

@@ -51,6 +51,6 @@ public class Slot
 
     }
 
-    public override string ToString() => IsEmpty ? "(Boş)": $"{Item!.Name} X {Amount} adet";
+    public override string ToString() => IsEmpty ? "  (Boş)  ": $"{Item!.Name} X {Amount} adet";
 
 }

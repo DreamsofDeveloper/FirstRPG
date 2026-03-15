@@ -120,13 +120,25 @@ public bool SpendFromInventory(int itemId, int amount)
 }
 
     
-/*
-    public List<Slot> GetAllItems()
+
+   public List<Item> ReturnAllItems()
     {
-           return _Slots;
-          
+    List<Item> items = new List<Item>();
+
+    for (int i = 0; i < _Slots.Count; i++)
+    {
+        if (_Slots[i].Item != null)
+        {
+         for(int x = 0; x < _Slots[i].Amount; x ++){
+            items.Add(_Slots[i].Item!);
+         }
+
+        }
     }
-*/
+
+    return items;
+    }
+
   public bool ItemExist(int itemId) => ItemAmount(itemId) > 0;
 
 public int ItemAmount(int itemId)
@@ -180,7 +192,8 @@ public int ItemAmount(int itemId)
 
  public void RemoveItemFromSlot(int slotnum, int amount)
     {
-        _Slots[slotnum].RemoveFromSlot(amount);
+        int index = slotnum -1;
+        _Slots[index].RemoveFromSlot(amount);
     }
 
 

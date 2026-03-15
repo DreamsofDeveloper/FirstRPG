@@ -2,18 +2,15 @@ using System;
 using FirstRPG.Entities.Items;
 
 public abstract class Creatures
-
 {
-    public string Name{get;}
-    public double Hp{get; set;}
+    public string Name { get; }
+    public double Hp { get; set; }
     private double ReHp = 50;
-    public double AttackPower;
-    private Container Container;
-    public bool IsDead = false;
+    public double AttackPower { get; set; }
+    public Container Container { get; protected set; }
+    public bool IsDead { get; set; }
 
-
-    //Body Parts
-
+    // Body Parts
     public Armor? HeadArmor { get; set; }
     public Armor? BodyArmor { get; set; }
     public Armor? HandArmor { get; set; }
@@ -21,53 +18,60 @@ public abstract class Creatures
     public Armor? FeetArmor { get; set; }
     public Armor? Shield { get; set; }
     public Weapon? EquippedWeapon { get; set; }
-    Floor Floor;
 
-   
+    public Floor Floor { get; protected set; }
 
-
-   
-    public Creatures(string name, double hp, Floor floor, Container container, Armor? headarmor, Armor? bodyarmor, Armor? handarmor, Armor? legarmor, Armor? feetarmor, Armor shield, Weapon weapon, double attackpower, bool isdead )
+    public Creatures(
+        string name,
+        double hp,
+        Floor floor,
+        Container container,
+        Armor? headarmor,
+        Armor? bodyarmor,
+        Armor? handarmor,
+        Armor? legarmor,
+        Armor? feetarmor,
+        Armor? shield,
+        Weapon? weapon,
+        double attackpower,
+        bool isdead)
     {
         Name = name;
         Hp = hp;
-        Floor     = floor;
+        Floor = floor;
         Container = container;
         HeadArmor = headarmor;
         BodyArmor = bodyarmor;
         HandArmor = handarmor;
-        LegArmor  = legarmor;
+        LegArmor = legarmor;
         FeetArmor = feetarmor;
-        Shield    = shield;
+        Shield = shield;
         EquippedWeapon = weapon;
         AttackPower = attackpower;
         IsDead = isdead;
-       
     }
 
     public void TakeDamage(double amount)
-        {
+    {
         if (IsDead) return;
 
-         Hp -= amount;
+        Hp -= amount;
 
-            if (Hp < 0)
-                 Hp = 0;
+        if (Hp < 0)
+            Hp = 0;
 
-            Console.WriteLine($"{Name} {amount} hasar aldı. Kalan HP: {Hp}");
+        Console.WriteLine($"{Name} {amount} hasar aldı. Kalan HP: {Hp}");
 
-         if (Hp <= 0 && !IsDead)
-            {
-                Die();
-             }
+        if (Hp <= 0 && !IsDead)
+        {
+            Die();
         }
+    }
 
     public virtual void Die()
     {
         IsDead = true;
         Console.WriteLine($"{Name} öldü!");
-
-             
     }
 
     public void Respawn()
@@ -77,16 +81,26 @@ public abstract class Creatures
             Hp = ReHp;
             IsDead = false;
         }
-
     }
 
-    public double CalculateAttacPower()
-    {
-       return AttackPower += EquippedWeapon!.Damage;
-    }
-
-   
-
+    public double CalculateAttackPower
     
+    {
+        get {
+
+            double weaponDamage = EquippedWeapon?.Damage ?? 0;
+        
+        return AttackPower +  weaponDamage;
+    }
+
+    }
+
+
+  
+
+    public virtual List<Item> Loots()
+    {
+        return new List<Item>();
+    }
 
 }

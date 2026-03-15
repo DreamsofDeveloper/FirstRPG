@@ -2,38 +2,40 @@ using FirstRPG.Entities.Items;
 using FirstRPG.Entities.Items.Materials;
 
 public class Goblin : Humanoid
-
- 
-
-
 {
-
     ItemDropSystem itemDropSystem;
-
-
-    private static int healt = 100;
-    public static double Attackpower = 8;
-    private static Bag bag = new Bag();
-    public static bool isdead = false;
-
-// body parts
-
-    public static  Armor? headArmor { get; set; }
-    public static  Armor? bodyArmor { get; set; }
-    public static  Armor? handArmor { get; set; }
-    public static  Armor? legArmor { get; set; }
-    public static  Armor? feetArmor { get; set; }
-    public static  Armor? shield { get; set; }
-    public static Weapon? equippedWeapon { get; set; }
-
-    public Goblin ( Floor floor) : 
-    base("Goblin", healt, floor, bag, headArmor, bodyArmor, handArmor, legArmor, feetArmor, shield, equippedWeapon,Attackpower,isdead)
+    ItemDatabase itemDatabase = new ItemDatabase();
+    private int level = 0;
+    private LootBag lootBag;
+    public Goblin(Floor floor)
+        : base("Goblin", 100, floor, new LootBag(), null, null, null, null, null, null, null, 8, false)
     {
-        
-        itemDropSystem = new ItemDropSystem();
-
+        itemDropSystem = new ItemDropSystem(floor);
+        lootBag = new LootBag();
+        lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stone),5);
+        lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stick),5);
+      
     }
 
-  
-    
+    public override List<Item> Loots()
+    {
+       if (!IsDead)
+            return new List<Item>();
+
+       return new List<Item>(lootBag.ReturnAllItems()!);
+    }
+
+    public override void Die()
+    {
+
+        base.Die();
+
+        foreach(var item in Loots()){
+            
+            itemDropSystem.DropItem(item,Name);
+        }
+
+
+        
+    }
 }

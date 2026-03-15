@@ -1,13 +1,7 @@
 using FirstRPG.Entities.Items;
 
 public class Armor : Item, IDurability
-{ public const bool isSellable = true;
-    public const bool isStackable = false;
-    public const bool isDroppable = true;
-    public const bool wearable = true;
-    public const int maxStack = 1;
-    public const ItemType type = ItemType.Armor;
-
+{
     public double Protection { get; set; }
     public double Durability { get; set; }
     public double MaxDurability { get; set; }
@@ -20,20 +14,33 @@ public class Armor : Item, IDurability
         string name,
         string description,
         int value,
-        string rarity,
+        ItemRarity rarity,
         EquipmentsType armorType,
         double protection,
         double durability,
-        double maxdurability,
-        int requiredlevel,
-        int level)
-        : base(id, name, description, value, isStackable, maxStack, rarity, isSellable, isDroppable, wearable, type)
+        double maxDurability,
+        int requiredLevel,
+        int level,
+        BaseMaterial basematerial)
+        : base(
+            id,
+            name,
+            description,
+            value,
+            false,
+            1,
+            rarity,
+            true,
+            true,
+            true,
+            ItemType.Armor,
+            basematerial)
     {
+        ArmorType = armorType;
         Protection = protection;
         Durability = durability;
-        MaxDurability = maxdurability;
-        RequiredLevel = requiredlevel;
-        ArmorType = armorType;
+        MaxDurability = maxDurability;
+        RequiredLevel = requiredLevel;
         Level = level;
     }
 
