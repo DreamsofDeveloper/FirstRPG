@@ -17,7 +17,7 @@ namespace FirstRPG.Entities.Items
         
         }
 
-           public Item CreateItem(ItemsId id)
+ public Item CreateItem(ItemsId id)
 {
     switch (id)
     {
@@ -156,6 +156,8 @@ namespace FirstRPG.Entities.Items
 
 public enum BaseMaterial
 {
+    none,
+
     // Natural / Basic
     Wood,
     Stone,

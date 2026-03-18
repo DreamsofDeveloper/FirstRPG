@@ -14,6 +14,10 @@ public class Goblin : Humanoid
         lootBag = new LootBag();
         lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stone),5);
         lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stick),5);
+
+
+        BodyArmor =(Armor)itemDatabase!.CreateItem(ItemsId.Iron_Armor);
+;
       
     }
 
