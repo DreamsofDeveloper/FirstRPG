@@ -22,7 +22,7 @@ public class CombatSystem
     {
             durabilityLoss += MaterialInteraction.GetCombatDurabilityLossForWeapon(
             attacker.EquippedWeapon.BaseMaterial,
-            target.Shield.BaseMaterial);
+            target.Shield.BaseMaterial); 
         }
 
         if (target.BodyArmor != null)

@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\C# course\\FirstRPG\\FirstRPG\\FirstRPG.csproj": {}
+    "/home/yasin/Projects/FirstRPG/FirstRPG.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\C# course\\FirstRPG\\FirstRPG\\FirstRPG.csproj": {
+    "/home/yasin/Projects/FirstRPG/FirstRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\C# course\\FirstRPG\\FirstRPG\\FirstRPG.csproj",
+        "projectUniqueName": "/home/yasin/Projects/FirstRPG/FirstRPG.csproj",
         "projectName": "FirstRPG",
-        "projectPath": "C:\\Dev\\C# course\\FirstRPG\\FirstRPG\\FirstRPG.csproj",
-        "packagesPath": "C:\\Users\\leydi\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\C# course\\FirstRPG\\FirstRPG\\obj\\",
+        "projectPath": "/home/yasin/Projects/FirstRPG/FirstRPG.csproj",
+        "packagesPath": "/home/yasin/.nuget/packages/",
+        "outputPath": "/home/yasin/Projects/FirstRPG/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\leydi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/yasin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

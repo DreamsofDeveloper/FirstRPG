@@ -227,13 +227,13 @@ private void EquipArmor(Armor armor, int slot)
 public string EquipmentsList()
 {
     return
-        $"Head: {(HeadArmor == null ? "(Boş)" : HeadArmor.Name)}\n" +
-        $"Body: {(BodyArmor == null ? "(Boş)" : BodyArmor.Name)}\n" +
-        $"Hand: {(HandArmor == null ? "(Boş)" : HandArmor.Name)}\n" +
-        $"Leg: {(LegArmor == null ? "(Boş)" : LegArmor.Name)}\n" +
-        $"Feet: {(FeetArmor == null ? "(Boş)" : FeetArmor.Name)}\n" +
-        $"Shield: {(Shield == null ? "(Boş)" : Shield.Name)}\n" +
-        $"Weapon: {(EquippedWeapon == null ? "(Boş)" : EquippedWeapon.Name)}";
+        $"Head: {(HeadArmor == null ? "(Boş)" : HeadArmor.Name + " Dayanıklık: " + HeadArmor.Durability)}\n" +
+        $"Body: {(BodyArmor == null ? "(Boş)" : BodyArmor.Name + " Dayanıklık: " + BodyArmor.Durability)}\n" +
+        $"Hand: {(HandArmor == null ? "(Boş)" : HandArmor.Name + " Dayanıklık: " + HandArmor.Durability)}\n" +
+        $"Leg: {(LegArmor == null ? "(Boş)"   : LegArmor.Name  + " Dayanıklık: " + LegArmor.Durability)}\n" +
+        $"Feet: {(FeetArmor == null ? "(Boş)" : FeetArmor.Name + " Dayanıklık: " + FeetArmor.Durability)}\n" +
+        $"Shield: {(Shield == null ? "(Boş)"  : Shield.Name    + " Dayanıklık: " + Shield.Durability)}\n" +
+        $"Weapon: {(EquippedWeapon == null ? "(Boş)" : EquippedWeapon.Name + " Hasar: " + EquippedWeapon.Damage + " Dayanıklık: " + EquippedWeapon.Durability)}";
 }
 
 
