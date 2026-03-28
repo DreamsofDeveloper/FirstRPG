@@ -7,7 +7,7 @@ public class Player : Humanoid
      
 
     public Player(string name, Floor floor)
-        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 40, false)
+        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 10, false)
     {
       
     }
@@ -142,6 +142,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             HeadArmor = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 
@@ -156,6 +157,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             BodyArmor = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 
@@ -170,6 +172,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             HandArmor = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 
@@ -184,6 +187,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             LegArmor = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 
@@ -198,6 +202,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             FeetArmor = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 
@@ -212,6 +217,7 @@ private void EquipArmor(Armor armor, int slot)
             }
 
             Shield = armor;
+            RefreshShieldFromEquipment();
             break;
         }
 

@@ -7,17 +7,18 @@ public class Goblin : Humanoid
     ItemDatabase itemDatabase = new ItemDatabase();
     private int level = 0;
     private LootBag lootBag;
+
+
     public Goblin(Floor floor)
-        : base("Goblin", 100, floor, new LootBag(), null, null, null, null, null, null, null, 8, false)
+        : base("Goblin", 100, floor, new LootBag(), null,null, null, null, null, null, null, 8, false)
     {
         itemDropSystem = new ItemDropSystem(floor);
         lootBag = new LootBag();
         lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stone),5);
         lootBag.AddItem(itemDatabase!.CreateItem(ItemsId.Stick),5);
 
-
-        BodyArmor =(Armor)itemDatabase!.CreateItem(ItemsId.Iron_Armor);
-;
+        BodyArmor =(Armor) itemDatabase!.CreateItem(ItemsId.Iron_Armor);
+        RefreshShieldFromEquipment();
       
     }
 

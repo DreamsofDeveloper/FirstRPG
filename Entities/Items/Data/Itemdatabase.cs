@@ -89,7 +89,7 @@ namespace FirstRPG.Entities.Items
                 120,
                 ItemRarity.Rare,
                 EquipmentsType.ChestArmor,
-                10,
+                50,
                 90,
                 90,
                 12,

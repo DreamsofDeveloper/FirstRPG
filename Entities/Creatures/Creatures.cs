@@ -5,6 +5,25 @@ public abstract class Creatures
 {
     public string Name { get; }
     public double Hp { get; set; }
+public double TotalShieldPower
+{
+    get
+    {
+        double total = 0;
+
+        if (HeadArmor != null) total += HeadArmor.Protection;
+        if (BodyArmor != null) total += BodyArmor.Protection;
+        if (HandArmor != null) total += HandArmor.Protection;
+        if (LegArmor != null) total += LegArmor.Protection;
+        if (FeetArmor != null) total += FeetArmor.Protection;
+        if (Shield != null) total += Shield.Protection;
+
+        return total;
+    }
+}
+
+public double CurrentShieldPower { get; protected set; }
+
     private double ReHp = 50;
     public double AttackPower { get; set; }
     public Container Container { get; protected set; }
@@ -21,6 +40,8 @@ public abstract class Creatures
 
     public Floor Floor { get; protected set; }
 
+    private List<Armor> Armorequipments = new List<Armor>();
+
     public Creatures(
         string name,
         double hp,
@@ -34,7 +55,8 @@ public abstract class Creatures
         Armor? shield,
         Weapon? weapon,
         double attackpower,
-        bool isdead)
+        bool isdead
+        )
     {
         Name = name;
         Hp = hp;
@@ -49,24 +71,47 @@ public abstract class Creatures
         EquippedWeapon = weapon;
         AttackPower = attackpower;
         IsDead = isdead;
+        
+
+
+        CurrentShieldPower = TotalShieldPower;
+
     }
+  public void TakeDamage(double amount)
+{
+    if (IsDead) return;
 
-    public void TakeDamage(double amount)
+    double remainingDamage = amount;
+
+    if (CurrentShieldPower > 0)
     {
-        if (IsDead) return;
-
-        Hp -= amount;
-
-        if (Hp < 0)
-            Hp = 0;
-
-        Console.WriteLine($"{Name} {amount} hasar aldı. Kalan HP: {Hp}");
-
-        if (Hp <= 0 && !IsDead)
+        if (CurrentShieldPower >= remainingDamage)
         {
-            Die();
+            CurrentShieldPower -= remainingDamage;
+            remainingDamage = 0;
+        }
+        else
+        {
+            remainingDamage -= CurrentShieldPower;
+            CurrentShieldPower = 0;
         }
     }
+
+    if (remainingDamage > 0)
+    {
+        Hp -= remainingDamage;
+    }
+
+    if (Hp < 0)
+        Hp = 0;
+
+    Console.WriteLine($"{Name} {amount} hasar aldı. Kalan HP: {Hp}, Kalkan: {CurrentShieldPower}");
+
+    if (Hp <= 0 && !IsDead)
+    {
+        Die();
+    }
+}
 
     public virtual void Die()
     {
@@ -102,5 +147,12 @@ public abstract class Creatures
     {
         return new List<Item>();
     }
+
+ public void RefreshShieldFromEquipment()
+{
+    CurrentShieldPower = TotalShieldPower;
+}
+
+    
 
 }
