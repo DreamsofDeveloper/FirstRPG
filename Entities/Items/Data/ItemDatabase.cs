@@ -23,7 +23,7 @@ namespace FirstRPG.Entities.Items
     {
         case ItemsId.Wooden_Sword:
             return new Weapon(
-                (int)id,
+                id,
                 "Wooden Sword",
                 "Ağaçtan yapılma basit bir kılıç",
                 10,
@@ -38,7 +38,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Iron_Sword:
             return new Weapon(
-                (int)id,
+                id,
                 "Iron Sword",
                 "Demir kılıç",
                 50,
@@ -53,7 +53,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Steel_Sword:
             return new Weapon(
-                (int)id,
+                id,
                 "Steel Sword",
                 "Çelik kılıç",
                 120,
@@ -68,7 +68,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Cloth_Hood:
             return new Armor(
-                (int)id,
+                id,
                 "Cloth Hood",
                 "Basit kumaş başlık",
                 10,
@@ -83,13 +83,13 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Iron_Armor:
             return new Armor(
-                (int)id,
+                id,
                 "Iron Armor",
                 "Demir göğüs zırhı",
                 120,
                 ItemRarity.Rare,
                 EquipmentsType.ChestArmor,
-                50,
+                12,
                 90,
                 90,
                 12,
@@ -98,7 +98,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Stone:
             return new Material(
-                (int)id,
+                id,
                 "Stone",
                 "Basit Taş",
                 1,
@@ -110,7 +110,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.Stick:
             return new Material(
-                (int)id,
+                id,
                 "Stick",
                 "Odun dalı",
                 1,
@@ -119,9 +119,20 @@ namespace FirstRPG.Entities.Items
                 true,
                 BaseMaterial.Wood);
 
+        case ItemsId.Wood:
+            return new Material(
+                id,
+                "Wood",
+                "Ağaçtan elde edilen odun",
+                1,
+                999,
+                ItemRarity.Common,
+                true,
+                BaseMaterial.Wood);
+
         case ItemsId.IronOre:
             return new Material(
-                (int)id,
+                id,
                 "Iron Ore",
                 "Demir cevheri",
                 5,
@@ -132,7 +143,7 @@ namespace FirstRPG.Entities.Items
 
         case ItemsId.DragonScale:
             return new Material(
-                (int)id,
+                id,
                 "Dragon Scale",
                 "Ejderha pulları",
                 500,
@@ -141,6 +152,8 @@ namespace FirstRPG.Entities.Items
                 true,
                 BaseMaterial.Scale);
 
+       
+
         default:
             throw new Exception("Item bulunamadı");
             
@@ -148,7 +161,12 @@ namespace FirstRPG.Entities.Items
 }
 
     
-
+    public String GetItemNameById(ItemsId id)
+{
+    Item item = CreateItem(id);
+    return $"{item.Name}";
+    
+}
 
     }
 
@@ -209,6 +227,7 @@ public enum BaseMaterial
 
 public enum ItemsId
 {
+    none = 0,
     // Materials 1000
     Stone = 1001,
     Stick = 1002,
@@ -378,8 +397,6 @@ public enum ItemsId
 
 
     }
-
-
 
 
  

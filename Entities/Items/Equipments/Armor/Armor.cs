@@ -10,7 +10,7 @@ public class Armor : Item, IDurability
     public EquipmentsType ArmorType { get; set; }
 
     public Armor(
-        int id,
+        ItemsId id,
         string name,
         string description,
         int value,

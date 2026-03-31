@@ -9,7 +9,7 @@ public abstract class Container
 private  int _Capacity;
 protected string ContainerName;
 private bool FullTextSize = false;
-private int? Lastitem = null;
+private ItemsId Lastitem;
 
 
 private readonly List<Slot> _Slots;
@@ -76,11 +76,8 @@ public Container(int _capacity, string container_name)
         Console.WriteLine($"{ContainerName} dolu, {item.Name} alınamadı!");
         Lastitem = item.Id;
         }
-    }
-     else
-    {
-           Lastitem = null;
-       }
+    }else Lastitem = ItemsId.none;
+    
         // Kalan miktar 0 dan büyük ise, çanta tamamen dolmuştur.
         return amount;
 
@@ -91,7 +88,7 @@ public Container(int _capacity, string container_name)
 
     }
         // Slottan item sil
-public bool SpendFromInventory(int itemId, int amount)
+public bool SpendFromInventory(ItemsId itemId, int amount)
 {
     if (amount <= 0) return true;
 
@@ -139,9 +136,9 @@ public bool SpendFromInventory(int itemId, int amount)
     return items;
     }
 
-  public bool ItemExist(int itemId) => ItemAmount(itemId) > 0;
+  public bool ItemExist(ItemsId itemId) => ItemAmount(itemId) > 0;
 
-public int ItemAmount(int itemId)
+public int ItemAmount(ItemsId itemId)
 {
     int total = 0;
 

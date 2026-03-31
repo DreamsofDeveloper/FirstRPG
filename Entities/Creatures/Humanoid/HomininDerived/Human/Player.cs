@@ -7,7 +7,7 @@ public class Player : Humanoid
      
 
     public Player(string name, Floor floor)
-        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 10, false)
+        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 50, false)
     {
       
     }
@@ -71,12 +71,12 @@ public void Use()
 
 
 
-    public bool LookInBag(int itemId)
+    public bool LookInBag(ItemsId itemId)
     {
         return Container.ItemExist(itemId);
     }
 
-    public bool SpendFromBag(int itemId, int amount)
+    public bool SpendFromBag(ItemsId itemId, int amount)
     {
         return Container.SpendFromInventory(itemId, amount);
     }

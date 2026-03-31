@@ -10,7 +10,7 @@ public class Weapon : Item, IDurability
     public EquipmentsType WeaponType { get; set; }
 
     public Weapon(
-        int id,
+        ItemsId id,
         string name,
         string description,
         int value,

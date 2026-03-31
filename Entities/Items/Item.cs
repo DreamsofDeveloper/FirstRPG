@@ -2,7 +2,7 @@ namespace FirstRPG.Entities.Items
 {
     public abstract class Item
     {
-        public int Id { get; }
+        public ItemsId Id { get; }
         public string Name { get; }
         public string Description { get; }
         public int Value { get; }
@@ -16,7 +16,7 @@ namespace FirstRPG.Entities.Items
         public BaseMaterial BaseMaterial{ get; }
 
         protected Item(
-            int id,
+            ItemsId id,
             string name,
             string description,
             int value,
