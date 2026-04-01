@@ -1,103 +1,113 @@
-using System.Linq.Expressions;
 using FirstRPG.Entities.Items;
 
 public class CraftSystem
 {
-    
-   
-   private readonly ItemDatabase itemdatabase;
-   private readonly List<Item> allItems;
-   private readonly List<Recipe> Recipes = new List<Recipe>();
-   
+    private readonly ItemDatabase itemdatabase;
+    private readonly List<Recipe> recipes = new();
 
-    
-  
-  public CraftSystem()
+    public CraftSystem()
     {
         itemdatabase = new ItemDatabase();
-        allItems = itemdatabase.GetAllItems();
 
-        Recipes.Add(
-            
-        new Recipe(ItemsId.Wooden_Sword, new List<(ItemsId, int)>
-        {
-            (ItemsId.Stick, 1),
-            (ItemsId.Wood, 2)
-        }));
-        Recipes.Add(
-        new Recipe(ItemsId.Iron_Sword, new List<(ItemsId, int)>
-        {
-            (ItemsId.Stick, 1),
-            (ItemsId.IronOre,2)
-        
-        }));
-        
-        
+        recipes.Add(
+            new Recipe(ItemsId.Wooden_Sword, new List<(ItemsId, int)>
+            {
+                (ItemsId.Stick, 1),
+                (ItemsId.Wood, 2)
+            }));
 
-
+        recipes.Add(
+            new Recipe(ItemsId.Iron_Sword, new List<(ItemsId, int)>
+            {
+                (ItemsId.Stick, 1),
+                (ItemsId.IronOre, 2)
+            }));
     }
-   public void CraftMenu(Player player,Floor floor)
+
+    public void CraftMenu(Player player, Floor floor)
     {
-        Console.WriteLine("---------------------------\n        Craft        \n---------------------------\n");
-        for(int i = 0; i < Recipes.Count; i++)
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("          Craft");
+        Console.WriteLine("---------------------------");
+
+        for (int i = 0; i < recipes.Count; i++)
         {
-            Console.WriteLine(i+1 + ". " + Recipes[i]);
-            
+            Console.WriteLine($"{i + 1}. {recipes[i]}");
         }
-        
-                
 
         Console.Write("Seçim: ");
         string? craftSelect = Console.ReadLine();
-        
-        bool index = int.TryParse(craftSelect, out int result);
 
-        if (index)
+        if (!int.TryParse(craftSelect, out int result))
         {
-         if(result - 1 <= Recipes.Count) Craft(itemdatabase.CreateItem(Recipes[result -1].ResultItemId), 
-         Recipes[result -1], player, floor);
-        }else Console.WriteLine("Geçersiz Seçim");
+            Console.WriteLine("Geçersiz seçim.");
+            return;
+        }
 
-        
+        if (result <= 0 || result > recipes.Count)
+        {
+            Console.WriteLine("Geçersiz seçim.");
+            return;
+        }
+
+        Recipe selectedRecipe = recipes[result - 1];
+        Item resultItem = itemdatabase.CreateItem(selectedRecipe.ResultItemId);
+
+        Craft(resultItem, selectedRecipe, player, floor);
     }
 
-    private void Craft(Item resultItem, Recipe recipe, Player player,Floor floor)
+    private void Craft(Item resultItem, Recipe recipe, Player player, Floor floor)
     {
-        int controlcount = 0;
+        if (!CanCraft(recipe, player))
+        {
+            Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok!");
+            return;
+        }
 
-        // Malzemeler yeterliyse harca ve ürünü ekle
-foreach(var item in recipe.RequiredItems){
+        if (!ConsumeMaterials(recipe, player))
+        {
+            Console.WriteLine("İtem harcama başarısız.");
+            return;
+        }
 
-if(player.LookInBag(item.itemsid))
-{
-    
-        controlcount ++;
+        Console.WriteLine($"{resultItem.Name} oluşturuldu!");
 
-if(controlcount == recipe.RequiredItems.Count){
+        int isAdded = player.AddPlayerInventory(resultItem, 1);
 
-       if (player.SpendFromBag(item.itemsid, item.amount))
-{
-          Console.WriteLine($"{resultItem.Name} oluşturuldu!");
-          int Isadded = player.AddPlayerInventory(resultItem, 1);
-          if (Isadded > 0) floor.AddItemToFloor(resultItem);
-          controlcount = 0;
-}else
-{
-    Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok! 1");
-    controlcount = 0;
-}
- }else continue;
-                
-
-}else
-{
-    Console.WriteLine("Bu eşyayı yapmak için yeterli malzemen yok! 2");
-    controlcount = 0;
-}
-}
-
+        if (isAdded > 0)
+        {
+            floor.AddItemToFloor(resultItem);
+            Console.WriteLine($"{resultItem.Name} envanter dolu olduğu için yere bırakıldı.");
+        }
     }
 
-  
+    private bool CanCraft(Recipe recipe, Player player)
+    {
+        foreach (var requiredItem in recipe.RequiredItems)
+        {
+            if (player.GetItemAmountInBag(requiredItem.itemsid) < requiredItem.amount)
+            {
+                return false;
+            }
+        }
 
+        return true;
     }
+
+    private bool ConsumeMaterials(Recipe recipe, Player player)
+    {
+        foreach (var requiredItem in recipe.RequiredItems)
+        {
+            bool spent = player.SpendFromBag(requiredItem.itemsid, requiredItem.amount);
+
+            if (!spent)
+            {
+                return false;
+            }
+
+            Console.WriteLine($"{requiredItem.itemsid} x{requiredItem.amount} harcandı.");
+        }
+
+        return true;
+    }
+}

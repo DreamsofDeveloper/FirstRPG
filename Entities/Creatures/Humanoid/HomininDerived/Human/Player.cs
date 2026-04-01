@@ -26,6 +26,11 @@ public class Player : Humanoid
         return left;
     }
 
+    public int GetItemAmountInBag(ItemsId itemsId)
+    {
+        return Container.ItemAmount(itemsId);
+    }
+
 
 public void Use()
 {
