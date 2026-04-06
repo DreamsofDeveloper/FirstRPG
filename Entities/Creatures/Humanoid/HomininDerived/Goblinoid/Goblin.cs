@@ -10,7 +10,7 @@ public class Goblin : Humanoid
 
 
     public Goblin(Floor floor)
-        : base("Goblin", 100, floor, new LootBag(), null,null, null, null, null, null, null, 8, false)
+        : base("Goblin", 100, floor, new LootBag(), null,null, null, null, null, null, null, 4, false)
     {
         itemDropSystem = new ItemDropSystem(floor);
         lootBag = new LootBag();
