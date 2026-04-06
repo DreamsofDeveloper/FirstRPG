@@ -24,7 +24,7 @@ public double TotalShieldPower
 
 public double CurrentShieldPower { get; protected set; }
 
-    private double ReHp = 50;
+    private double ReHp = Hp;
     public double AttackPower { get; set; }
     public Container Container { get; protected set; }
     public bool IsDead { get; set; }
