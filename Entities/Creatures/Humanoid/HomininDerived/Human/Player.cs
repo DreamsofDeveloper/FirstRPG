@@ -7,7 +7,7 @@ public class Player : Humanoid
      
 
     public Player(string name, Floor floor)
-        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 50, false)
+        : base(name, 100, floor, new Bag(), null, null, null, null, null, null, null, 5, false)
     {
       
     }
