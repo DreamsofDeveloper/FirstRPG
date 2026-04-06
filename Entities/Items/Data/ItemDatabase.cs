@@ -38,6 +38,18 @@ public Item CreateItem(ItemsId id)
 
         case ItemsId.Stone:
             return new Material(id, "Stone", "Basit taş", 1, 999, ItemRarity.Common, true, BaseMaterial.Stone);
+            
+        case ItemsId.IronIngot:
+            return new Material(id, "Iron Ingot", "Demir külçesi", 12, 999, ItemRarity.Common, true, BaseMaterial.Iron);
+
+        case ItemsId.GoldIngot:
+            return new Material(id, "Gold Ingot", "Altın külçesi", 80, 500, ItemRarity.Rare, true, BaseMaterial.Gold);
+
+        case ItemsId.CopperIngot:
+            return new Material(id, "Copper Ingot", "Bakır külçesi", 8, 999, ItemRarity.Common, true, BaseMaterial.Copper);
+
+        case ItemsId.CopperOre:
+            return new Material(id, "Copper Ore", "Ham bakır cevheri", 4, 999, ItemRarity.Common, true, BaseMaterial.Copper);
 
         case ItemsId.Stick:
             return new Material(id, "Stick", "İnce odun dalı", 1, 999, ItemRarity.Common, true, BaseMaterial.Wood);
@@ -48,8 +60,6 @@ public Item CreateItem(ItemsId id)
         case ItemsId.IronOre:
             return new Material(id, "Iron Ore", "Ham demir cevheri", 5, 999, ItemRarity.Common, true, BaseMaterial.Iron);
 
-        case ItemsId.CopperOre:
-            return new Material(id, "Copper Ore", "Ham bakır cevheri", 4, 999, ItemRarity.Common, true, BaseMaterial.Copper);
 
         case ItemsId.Coal:
             return new Material(id, "Coal", "Kömür; eritme fırınlarında yakıt olarak kullanılır", 3, 999, ItemRarity.Common, true, BaseMaterial.Coal);
@@ -590,11 +600,15 @@ public enum BaseMaterial
 public enum ItemsId
 {
     none = 0,
+
+
     // Materials 1000
     Stone = 1001,
     Stick = 1002,
     Wood = 1003,
+    IronIngot= 100401,
     IronOre = 1004,
+    CopperIngot = 100501,
     CopperOre = 1005,
     Coal = 1006,
     Leather = 1007,
@@ -605,6 +619,7 @@ public enum ItemsId
     MagicDust = 1012,
     DragonScale = 1013,
     SilverOre = 1014,
+    GoldIngot= 101501,
     GoldOre = 1015,
     Obsidian = 1016,
     RuneStone = 1017,

@@ -85,7 +85,11 @@ public void Use()
     {
         return Container.SpendFromInventory(itemId, amount);
     }
-
+    
+    public List<Item> GetAllItemsList()
+    {
+       return Container.ReturnAllItems();
+    }
     public void ReadTheBag()
     {
         Container.Print();
